@@ -12,6 +12,8 @@ module.exports = (env, argv) => ({
                 test: /\.tsx?$/,
                 use: 'ts-loader',
                 exclude: /node_modules/,
+            },
+            {
                 test: /\.scss$/i,
                 use: [MiniCssPlugin.loader, {
                     loader: 'css-loader',
