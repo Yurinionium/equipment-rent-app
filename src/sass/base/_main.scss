@@ -1,0 +1,105 @@
+.main__wrapper{
+    margin: 0 auto;
+    max-width: 1440px;
+}
+
+.main__title{
+    color: #000;
+    font-family: Inter;
+    font-size: 64px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding: 49px 0 30px 89px;
+}
+
+.main__paragraph{
+    max-width: 1313px;
+    color: #000;
+    font-family: Inter;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding: 0 0 0 89px;
+}
+
+.main__paragraph-padding{
+    padding: 10px 0 10px 89px;
+}
+
+.main__subtitle{
+    margin-top: 30px;
+    padding-left: 89px;
+    color: #000;
+    font-family: Inter;
+    font-size: 43px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.main__cards{
+    display: flex;
+    margin: 26px auto 42px auto;
+    padding: 0 89px;
+    justify-content: space-between;
+    max-width: 1440px;
+}
+
+.main__card{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 340px;
+}
+
+.main__card-title{
+    color: #000;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.main__card-subtitle{
+    color: #000;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.main__button{
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    width: 268px;
+    height: 50px;
+    border-radius: 20px;
+    background: #485B6E;
+    color: #FFF;
+    font-family: Inter;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 60px;
+}
+
+.main__button:hover{
+    background-color: rgb(189, 90, 76);
+    color: #63676b;
+    transition: 1s all;
+}
+
+.main__img{
+    width: 878px;
+    height: 200px;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+    padding-bottom: 58px;
+}

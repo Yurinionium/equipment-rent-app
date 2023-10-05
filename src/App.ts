@@ -1,10 +1,10 @@
-export class Component {
+export class App {
     root: HTMLElement;
 
     constructor(
         public parent: HTMLElement | null,
         tagName: keyof HTMLElementTagNameMap,
-        arrStyle?: string[] | null,
+        arrStyle: string[] | null,
         attributes?: { [key: string]: string } | null,
         content?: string | null
     ) {
