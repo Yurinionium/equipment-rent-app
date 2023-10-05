@@ -17,13 +17,27 @@ export const FooterAutor = `
 
 export class Footer extends Component {
     constructor(
-        public parent: HTMLElement,
-        tagName: keyof HTMLElementTagNameMap,
-        arrStyle?: string[] | null,
-        attributes?: { [key: string]: string } | null,
-        content?: string | null
+        public parent: HTMLElement
     ) {
-       super(parent, tagName, arrStyle, attributes, content)
+        super(parent, 'footer', ['footer'], null, null)
+        const footerWrapper = new Component(this.root, 'div', ['footer__wrapp'], null, null);
+
+        const footerContacts = new Component(footerWrapper.root, 'ul', ['footer__list'], null, FooterMenu);
+
+        const footerInfo = new Component(footerWrapper.root, 'ul', ['footer__list'], null, null);
+
+        const footerInfoList = new Component(footerInfo.root, 'li', ['footer__list'], null, null);
+        const footerInfoListTitle = new Component(footerInfoList.root, 'p', ['footer__titile'], null, "Информация");
+        const footerInfoList1 = new Component(footerInfo.root, 'li', ['footer__list'], null, null);
+        const footerInfoListCatlog = new Component(footerInfoList1.root, 'p', ['footer__par'], null, "Каталог");
+        const footerInfoList2 = new Component(footerInfo.root, 'li', ['footer__list'], null, null);
+        const footerInfoListAvtorisation = new Component(footerInfoList2.root, 'p', ['footer__par'], null, "Авторизация");
+        const footerInfoList3 = new Component(footerInfo.root, 'li', ['footer__list'], null, null);
+        const footerInfoListBasket = new Component(footerInfoList3.root, 'p', ['footer__par'], null, "Корзина");
+        const footerInfoList4 = new Component(footerInfo.root, 'li', ['footer__list'], null, null);
+        const footerInfoListMainRoom = new Component(footerInfoList4.root, 'p', ['footer__par'], null, "Личный кабинет");
+
+        const footerAutor = new Component(footerWrapper.root, 'ul', ['footer__list'], null, FooterAutor);
     }
 
 }

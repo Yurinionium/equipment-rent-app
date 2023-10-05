@@ -9,7 +9,7 @@
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
-    padding: 51px 89px 50px 89px;
+    padding: 51px 89px 49px 89px;
 }
 
 .footer__list{
@@ -39,6 +39,10 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+}
+
+.footer__par:hover{
+    color: #b52b2b;
 }
 
 .footer__item-social{
