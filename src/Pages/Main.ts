@@ -25,5 +25,9 @@ export class Main extends Component {
 
         const mainButton = new Component(this.root, 'input', ['main__button'], { type: "button", value: "Каталог" }, null);
         const mainImg = new Component(this.root, 'img', ['main__img'], { src: "./assets/main__img.png", alt: "logo" }, null);
+
+        mainButton.root.addEventListener('click', () => {
+            window.location.hash = '#catalog'; 
+        })
     }
 }

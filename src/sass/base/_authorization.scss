@@ -1,0 +1,41 @@
+.autorization__title{
+    margin: 50px 0 50px 90px;
+}
+
+.autorization__par{
+    color: #000;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    max-width: 1262px;
+    margin-left: 115px;
+}
+
+.autorization__ots{
+    padding-bottom: 30px;
+}
+
+.autorization__button{
+    color: #FFF;
+    font-family: Goudy Bookletter 1911;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    border-radius: 20px;
+    background: #485B6E;
+    width: 322px;
+    height: 74px;
+    border: none;
+    margin: 50px auto;
+    display: block;
+    text-align: center;
+    transition: 1s all;
+}
+
+.autorization__button:hover{
+    color: aqua;
+    background-color: #485B6E;
+}

@@ -27,15 +27,15 @@ export class Component {
         if (content) {
             this.root.innerHTML = content;
         }
-
-        this.parent = parent;
         this.render();
     }
 
     render() {
         if (this.parent) {
-            this.parent.appendChild(this.root);
+            this.parent.append(this.root);
         }
     }
-
+    myRemove() {
+        this.root.remove();
+    }
 }

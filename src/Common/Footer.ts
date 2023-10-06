@@ -38,6 +38,19 @@ export class Footer extends Component {
         const footerInfoListMainRoom = new Component(footerInfoList4.root, 'p', ['footer__par'], null, "Личный кабинет");
 
         const footerAutor = new Component(footerWrapper.root, 'ul', ['footer__list'], null, FooterAutor);
-    }
 
+
+        footerInfoListCatlog.root.addEventListener('click', () =>{
+            window.location.hash = '#catalog';        
+        })
+        footerInfoListAvtorisation.root.addEventListener('click', () =>{
+            window.location.hash = '#authorization';        
+        })
+        footerInfoListBasket.root.addEventListener('click', () =>{
+            window.location.hash = '#basket';        
+        })
+        footerInfoListMainRoom.root.addEventListener('click', () =>{
+            window.location.hash = '#personalroom';        
+        })
+    }
 }
