@@ -1,0 +1,40 @@
+.container{
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 75px;
+}
+
+.null{
+    margin: 0;
+}
+
+.personal__container{
+    margin: 50px 422px 100px 213px;
+    display: flex;
+    align-items: flex-start;
+    gap: 300px;
+}
+
+.personalinform__container{
+    padding-top: 10px;
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+}
+
+.personaltext__container{
+    display: flex;
+    gap: 30px
+}
+
+.personal__text{
+    color: #000;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

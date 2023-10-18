@@ -1,8 +1,10 @@
 import { Component } from "../Abstract/Component";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 export class Authorization extends Component {
+    googleSignInButton:Component;
     constructor(
-        public parent: HTMLElement
+        public parent: HTMLElement,
     ) {
         super(parent, 'main', ['main__wrapper'], null, null)
         const mainTitle = new Component(this.root, 'h2', ['autorization__title', 'object__title'], null, "Авторизация");
@@ -10,9 +12,70 @@ export class Authorization extends Component {
         const mainParagraph2 = new Component(this.root, 'p', ['autorization__par'], null, "Кроме того, после регистрации вы сможете следить за статистикой ваших заказов и их выполнением. Вы будете в курсе статуса каждого заказа, его истории и деталей доставки. Это обеспечит вам дополнительный контроль над вашими покупками и позволит вам планировать свои покупки более эффективно.");
         const mainParagraph3 = new Component(this.root, 'p', ['autorization__par'], null, "Не упустите возможность сделать свой опыт покупок на нашем сайте более удобным и информативным. ");
         const mainParagraph4 = new Component(this.root, 'p', ['autorization__par'], null, "Создайте свою учетную запись сейчас и начните пользоваться всеми этими преимуществами!");
-        const mainButton = new Component(this.root, 'button', ['autorization__button'], null, "Continue with Google");
-        mainButton.root.addEventListener('click', () =>{
-            window.location.hash = '#authorization';        
-        })
+    
+        this.googleSignInButton = new Component(this.root, 'button', ['autorization__button'], null, "Continue with Google");
+        this.googleSignInButton.root.addEventListener('click', () => {
+            this.authWithGoogle();
+        });
+    }
+    authWithGoogle(): void {
+        const auth = getAuth();
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const { displayName, email } = result.user
+                const user = JSON.stringify({ displayName, email })
+
+                localStorage.setItem('user', user)
+                window.location.reload();
+            }).catch((error) => {
+                console.log(error);
+            });
     }
 }
+
+
+
+  // this.googleSignInButton.root.onclick  = () => {
+        //     this.authWithGoole()
+            
+        // }
+
+        // const user = localStorage.getItem('user')
+
+        // if (!user) {
+        //     this.googleSignInButton.myRemove()
+        // }
+
+
+
+
+
+          // authWithGoole(): void {
+    //     const auth = getAuth()
+    //     const provider = new GoogleAuthProvider()
+
+    //     signInWithPopup(auth, provider)
+    //         .then((result) => {
+    //             const { displayName, email } = result.user
+    //             const user = JSON.stringify({ displayName, email })
+
+    //             localStorage.setItem('user', user)
+
+    //             this.googleSignInButton?.myRemove()
+
+    //             window.location.hash = '#personalroom'
+    //         }).catch((error) => {
+    //             console.log(error);
+                
+    //         });
+    // }
+
+
+    // signInWithPopup(auth, provider)
+    // .then(() => {
+    //     window.location.reload()
+    // });
+    // .catch(() => {
+    //     console.log('error');
+    // })
