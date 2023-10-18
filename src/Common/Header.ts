@@ -11,8 +11,9 @@ export class Header extends Component {
     const headerList = new Component(headerContainer.root, 'ul', ['header__list'],  null, null);
     const headerItemMain = new Component(headerList.root, 'li', ['header__item'],  null, "Главная");
     const headerItemCatalog = new Component(headerList.root, 'li', ['header__item'],  null, "Каталог");
-    const headerItemAuto = new Component(headerList.root, 'li', ['header__item'],  null, "Авторизация");
     const headerItemBascket = new Component(headerList.root, 'li', ['header__item'],  null, "Корзина");
+    const headerItemAuto = new Component(headerList.root, 'li', ['header__item'],  null, "Личный кабинет");
+    
 
     headerImg.root.addEventListener('click', () =>{
         window.location.hash = '#';        
@@ -24,7 +25,7 @@ export class Header extends Component {
         window.location.hash = '#catalog';        
     })
     headerItemAuto.root.addEventListener('click', () =>{
-        window.location.hash = '#authorization';        
+        window.location.hash = '#personalroom';        
     })
     headerItemBascket.root.addEventListener('click', () =>{
         window.location.hash = '#basket';        
