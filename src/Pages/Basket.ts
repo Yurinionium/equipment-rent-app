@@ -1,8 +1,10 @@
 import { Component } from "../Abstract/Component";
+import { TServises } from "../Abstract/Types";
 
 export class Basket extends Component {
     constructor(
-        public parent: HTMLElement
+        public parent: HTMLElement,
+        private services: TServises
     ) {
         super(parent, 'main', ['main__wrapper'], null, null)
         const mainTitle = new Component(this.root, 'h2', ['catalog__title', 'object__title'], null, "Корзина");

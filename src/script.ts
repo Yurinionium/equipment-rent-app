@@ -11,28 +11,34 @@ import { PersonalAccount } from "./Pages/PersonalAccount"
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../configFB"
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { AuthService } from "./Services/AuthService";
+import { LogicService } from "./Services/LogicService"
 
 const body = document.body;
 initializeApp(firebaseConfig);
 
+const services = {
+    authService: new AuthService(),
+    logicService: new LogicService()
+}
 
 class App {
     constructor(parrent: HTMLElement) {
         const wrap = new Component(parrent, 'div', []);
         
-        new Header(wrap.root);
+        new Header(wrap.root, services);
         const main = new Component(wrap.root, "main");
 
         const links = {
-        '#': new Main(main.root),
-        '#catalog': new Catalog(main.root),
-        '#authorization': new Authorization(main.root),
-        '#basket': new Basket(main.root),
-        '#personalroom': new PersonalAccount(main.root),
+        '#': new Main(main.root, services),
+        '#catalog': new Catalog(main.root, services),
+        '#authorization': new Authorization(main.root, services),
+        '#basket': new Basket(main.root, services),
+        '#personalroom': new PersonalAccount(main.root, services)
         }
 
-        new Router(links);
-        new Footer(wrap.root);
+        new Router(links, services);
+        new Footer(wrap.root, services);
     }
 }
 
@@ -44,6 +50,9 @@ declare global {
 
 const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
+    services.authService.user = user;
+    console.log(user);
+    
         if (!window.app) window.app = new App(document.body)
 }); 
 

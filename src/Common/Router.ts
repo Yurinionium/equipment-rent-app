@@ -1,8 +1,9 @@
 import { Component } from "../Abstract/Component";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { TServises } from "../Abstract/Types";
 
 export class Router {
-    constructor(public links: Record<string, Component>) {
+    constructor(public links: Record<string, Component>, private services: TServises) {
         this.openPage();
 
         window.onhashchange = () => {

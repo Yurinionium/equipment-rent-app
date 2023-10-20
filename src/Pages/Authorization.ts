@@ -1,10 +1,12 @@
 import { Component } from "../Abstract/Component";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { TServises } from "../Abstract/Types";
 
 export class Authorization extends Component {
     googleSignInButton:Component;
     constructor(
         public parent: HTMLElement,
+        private services: TServises
     ) {
         super(parent, 'main', ['main__wrapper'], null, null)
         const mainTitle = new Component(this.root, 'h2', ['autorization__title', 'object__title'], null, "Авторизация");
@@ -15,23 +17,23 @@ export class Authorization extends Component {
     
         this.googleSignInButton = new Component(this.root, 'button', ['autorization__button'], null, "Continue with Google");
         this.googleSignInButton.root.addEventListener('click', () => {
-            this.authWithGoogle();
+            this.services.authService.authWithGoogle();
         });
     }
-    authWithGoogle(): void {
-        const auth = getAuth();
-        const provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider)
-            .then((result) => {
-                const { displayName, email } = result.user
-                const user = JSON.stringify({ displayName, email })
+    // authWithGoogle(): void {
+    //     const auth = getAuth();
+    //     const provider = new GoogleAuthProvider();
+    //     signInWithPopup(auth, provider)
+    //         .then((result) => {
+    //             const { displayName, email } = result.user
+    //             const user = JSON.stringify({ displayName, email })
 
-                localStorage.setItem('user', user)
-                window.location.reload();
-            }).catch((error) => {
-                console.log(error);
-            });
-    }
+    //             localStorage.setItem('user', user)
+    //             window.location.reload();
+    //         }).catch((error) => {
+    //             console.log(error);
+    //         });
+    // }
 }
 
 

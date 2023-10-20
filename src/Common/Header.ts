@@ -1,9 +1,11 @@
 import { Component } from "../Abstract/Component";
+import { TServises } from "../Abstract/Types";
 
 export class Header extends Component {
 
     constructor(
-        public parent: HTMLElement
+        public parent: HTMLElement,
+        private services: TServises
     ) {
     super(parent, 'header', ['header'], null, null)
     const headerContainer = new Component(this.root, 'div', ['header__wrapp'], null, null);

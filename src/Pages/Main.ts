@@ -1,8 +1,10 @@
 import { Component } from "../Abstract/Component";
+import { TServises } from "../Abstract/Types";
 
 export class Main extends Component {
     constructor(
-        public parent: HTMLElement
+        public parent: HTMLElement,
+        private services: TServises
     ) {
         super(parent, 'main', ['main__wrapper'], null, null)
         const mainTitle = new Component(this.root, 'h1', ['main__title'], null, "Equipment-Rent-App");

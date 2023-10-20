@@ -1,9 +1,11 @@
 import { Component } from "../Abstract/Component";
 import { getDatabase, ref, child, get, set } from "firebase/database";
+import { TServises } from "../Abstract/Types";
 
 export class Catalog extends Component {
     constructor(
-        public parent: HTMLElement
+        public parent: HTMLElement,
+        private services: TServises
     ) {
         super(parent, 'main', ['main__wrapper'], null, null);
         const mainTitle = new Component(this.root, 'h2', ['catalog__title', 'object__title'], null, "Вибротрамбовки");

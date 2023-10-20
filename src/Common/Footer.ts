@@ -1,4 +1,5 @@
 import { Component } from "../Abstract/Component";
+import { TServises } from "../Abstract/Types";
 import "../style.scss"
 
 export const FooterMenu = `
@@ -17,7 +18,8 @@ export const FooterAutor = `
 
 export class Footer extends Component {
     constructor(
-        public parent: HTMLElement
+        public parent: HTMLElement,
+        private services: TServises
     ) {
         super(parent, 'footer', ['footer'], null, null)
         const footerWrapper = new Component(this.root, 'div', ['footer__wrapp'], null, null);
