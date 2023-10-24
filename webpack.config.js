@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const CopyPlugin = require("copy-webpack-plugin");
-const devServer = isDev => isDev ? { devServer: { open: true, hot: true, port: 8070, static: path.join(__dirname, 'dest'), }, } : {};
+const devServer = isDev => isDev ? { devServer: { open: true, hot: true, port: 8060, static: path.join(__dirname, 'dest'), }, } : {};
 const MiniCssPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env, argv) => ({

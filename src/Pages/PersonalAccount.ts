@@ -14,12 +14,6 @@ export class PersonalAccount extends Component {
 
         this.googgleLogOut = new Component(container.root, 'button', ['autorization__button', 'null'], null, "Выйти");
 
-        // const user = localStorage.getItem('user')
-        // const userData = user ? JSON.parse(user) : null
-
-        // const nameContent = userData ? `Name: ${userData.displayName}` : ''
-        // const emailContent = userData ? `Email: ${userData.email}` : ''
-
         const personalContainer = new Component(this.root, 'div', ['personal__container'], null);
         const personalImg = new Component(personalContainer.root, 'img', ['personal__img'], { src: `${services.authService.user?.photoURL}`, alt: "logo" }, null);
         const personInforContainer = new Component(personalContainer.root, 'div', ['personalinform__container'], null);
@@ -35,14 +29,4 @@ export class PersonalAccount extends Component {
             this.services.authService.outFromGoogle();
         });
     }
-    // outFromGoogle(): void{
-    //     const auth = getAuth();
-    //     signOut(auth)
-    //     .then(() => {
-    //         window.location.reload();
-    //     })
-    //     .catch((error) => {
-    //         console.log(error);
-    //     })
-    // }
 }

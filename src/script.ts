@@ -13,13 +13,15 @@ import { firebaseConfig } from "../configFB"
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { AuthService } from "./Services/AuthService";
 import { LogicService } from "./Services/LogicService"
+import { DBService } from "./Services/DBService"
 
 const body = document.body;
-initializeApp(firebaseConfig);
+const DBFirestore = initializeApp(firebaseConfig);
 
 const services = {
     authService: new AuthService(),
-    logicService: new LogicService()
+    logicService: new LogicService(),
+    dbService: new DBService(DBFirestore)
 }
 
 class App {
@@ -51,21 +53,15 @@ declare global {
 const auth = getAuth();
 onAuthStateChanged(auth, (user) => {
     services.authService.user = user;
-    console.log(user);
-    
+    services.dbService
+    .getDataUser(user)
+    .then(() => {
         if (!window.app) window.app = new App(document.body)
+    })
+    .catch((error) => {
+        console.log(error);
+    });
 }); 
 
-// window.app = new App(document.body)
 
-// const auth = getAuth();
-// onAuthStateChanged(auth, (user) => {
-//     if (user) {
-//         if (!window.app) window.app = new App(document.body)
-//     } else {
-        
 
-//         const provider = new GoogleAuthProvider();
-//         provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
-//     }
-// });

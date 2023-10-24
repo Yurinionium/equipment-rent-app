@@ -15,8 +15,7 @@ export class Router {
         Object.values(this.links).forEach((el) => el.myRemove())
 
         const url = window.location.hash.slice(1);
-        const auth = getAuth();
-        const user = auth.currentUser;
+        const user = this.services.authService.user;
         if ((url === 'basket' && !user)||(url === 'personalroom' && !user)) {
             this.links['#authorization'].render();
         } else {
