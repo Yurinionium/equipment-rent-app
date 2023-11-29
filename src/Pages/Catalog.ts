@@ -3,14 +3,6 @@ import { TServises, TGood } from "../Abstract/Types";
 import { Card } from "../Common/Card";
 
 
-export type Order = {
-    buyer: string,
-    product: string,
-    date: string,
-    isOrdered: boolean
-}
-
-
 export class Catalog extends Component {
     allGoods: TGood[] = []
     allCards: Component[] = []
@@ -40,12 +32,11 @@ export class Catalog extends Component {
 
         
         const useFilter = (event: Event) => {
-            const { type } = (event.target as HTMLElement).dataset
+            const { type } = (event.target as HTMLElement).dataset;
 
             if (type === 'showAll') {
-                return this.renderGoodsonPage()
+                return this.renderGoodsonPage();
             }
-            
             const filtered = this.allGoods.filter(good => good.category === type)
             this.renderGoodsonPage(filtered)
         }

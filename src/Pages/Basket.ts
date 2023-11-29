@@ -1,61 +1,85 @@
 import { Component } from "../Abstract/Component";
-import { TGood, TServises } from "../Abstract/Types";
-import { Card } from "../Common/Card";
-import { ServerOrder } from "../Services/DBService";
-import { Order } from "./Catalog";
+import { TGoodBasket, TServises, TDataBasket } from "../Abstract/Types";
+import { CardBasket } from "../Common/CardBasket";
+
 
 export class Basket extends Component {
-    allGoods: TGood[] = []
-    orders: ServerOrder[] = []
-    allCards: Component[] = []
+    divBasket: Component;
+    spanSumma: Component;
+    btnOpata: Component;
+    // spanPercent: Component;
+    // spanAllSumma: Component;
+    divAllBasket: Component;
+    divClearBasket: Component;
 
-    cards: Component
+    constructor(parrent: HTMLElement, private services: TServises) {
+        super(parrent, "div", ["basket_pages"]);
+        services.dbService.calcDataBasket();
 
-    constructor(
-        public parent: HTMLElement,
-        private services: TServises
-    ) {
-        super(parent, 'main', ['main__wrapper'], null, null)
-        const mainTitle = new Component(this.root, 'h2', ['catalog__title', 'object__title'], null, "Корзина")
+        let isBasketClear = false;
+        if (services.dbService.dataUser) {
+            if (services.dbService.dataUser.basket.length > 0) isBasketClear = true;
+        }
 
-        const user = this.services.authService.user;
+        new Component(this.root, 'h2', ['catalog__title', 'object__title', 'filter'], null, "Корзина");
+        this.divClearBasket = new Component(this.root, "div", ["basket__clear"]);
+        new Component(this.divClearBasket.root, "p", ['basket__null'], null, "Ваша корзина пуста!");
 
-       Promise.all([
-            services.dbService.getAllGoods(), 
-            services.dbService.getOrdersByBuyer(user ? user.uid : '')
-        ])
-            .then(result => {
-                const [ goods, orders ] = result
-                this.allGoods = goods
-                this.orders = orders
-                console.log({goods});
-                
+        this.divAllBasket = new Component(this.root, "div", ["basket__all"]);
 
-                const filtered = goods.filter(good => this.orders.find(order => (order.product === good.id) && !order.isOrdered))
+        this.divBasket = new Component(this.divAllBasket.root, "div", ["cards", "cards__basket"])
 
-                this.renderGoodsonPage(filtered)
-            })
+        this.toggleBasket(isBasketClear);
 
-        this.cards = new Component(this.root, "div", ["cards"])
+        if (services.dbService.dataUser) {
+            services.dbService.dataUser.basket.forEach((el) => {
+                this.putGoodsInBasket(this.divBasket, el);
+            });
+        }
 
-    
+        const divDataBasket = new Component(this.divAllBasket.root, "div", ["basket__data"]);
+        this.spanSumma = new Component(divDataBasket.root, "span", ["span"], null, `Общая сумма ${services.dbService.dataBasket.summa} руб.`);
 
+
+        this.btnOpata = new Component(this.divAllBasket.root, "button", ['cardBasket__button', 'oplata'], null, "Заказать")
+
+        this.btnOpata.root.onclick = () => {
+            const user = services.authService.user;
+            services.dbService.addBasketInHistory(user).then(() => {
+            });
+        };
+
+        services.dbService.addListener("goodInBasket", (good) => {
+            this.putGoodsInBasket(this.divBasket, good as TGoodBasket);
+            this.toggleBasket(true);
+        });
+
+        services.dbService.addListener("changeDataBasket", (dataBasket) => {
+            this.spanSumma.root.innerHTML = `${(dataBasket as TDataBasket).summa}`;
+            isBasketClear = false;
+            if (services.dbService.dataUser) {
+                if (services.dbService.dataUser.basket.length > 0) isBasketClear = true;
+            }
+            this.toggleBasket(isBasketClear);
+        });
+
+        services.dbService.addListener("clearBasket", () => {
+            this.divBasket.root.innerHTML = "";
+            this.toggleBasket(false);
+        });
     }
 
-    putGoodsOnPage(tag: Component, goods?: TGood[]) {
-        const items = goods || this.allGoods
-        items.forEach((product) => {
-            const order = this.orders.find(order => (order.product === product.id) && !order.isOrdered)
-            console.log(order);
-            
-
-            const card: any = new Card(tag.root, this.services, product, true, order ? order.id : '')
-            this.allCards.push(card)
-        })
+    putGoodsInBasket(tag: Component, product: TGoodBasket) {
+        new CardBasket(tag.root, this.services, product);
     }
 
-    renderGoodsonPage(goods?: TGood[]) {
-        this.allCards.forEach(card  => card.myRemove())
-        this.putGoodsOnPage(this.cards, goods)
+    toggleBasket(isBasketClear: boolean) {
+        if (isBasketClear) {
+            this.divClearBasket.myRemove();
+            this.divAllBasket.render();
+        } else {
+            this.divAllBasket.myRemove();
+            this.divClearBasket.render();
+        }
     }
 }
